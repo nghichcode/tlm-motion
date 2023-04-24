@@ -6,13 +6,15 @@
  * documentation for more details.
  */
 import {
+  ApiResponse,
   ApisauceInstance,
   create,
 } from "apisauce"
 import Config from "../../config"
 import type {
-  ApiConfig,
+  ApiConfig, ApiFeedResponse,
 } from "./api.types"
+import { GeneralApiProblem, getGeneralApiProblem } from "./apiProblem";
 
 /**
  * Configuring the apisauce instance.
@@ -42,8 +44,32 @@ export class Api {
         Accept: "application/json",
       },
     })
+    this.apisauce.addMonitor(this.monitor)
   }
 
+  monitor = (response: ApiResponse<any>) => {
+    __DEV__ && console.log(`${response?.config?.method} ${response?.config?.url}`)
+    __DEV__ && console.log("RESPONSE", response)
+
+    if (response?.config?.method === "get" && response?.config?.params !== undefined) {
+      __DEV__ && console.log("Params", response?.config?.params)
+    } else if (response?.config?.data !== undefined) {
+      __DEV__ && console.log("Params", JSON.parse(response?.config?.data))
+    }
+  }
+
+  async onUpload(deviceName: string, form: FormData): Promise<{ kind: "ok"; } | GeneralApiProblem> {
+    // make the api call
+    const response: ApiResponse<ApiFeedResponse> = await this.apisauce.post(`https://talisman-api.testbox.com.au/api/devices/${deviceName}/motion-data-upload-process`, form)
+
+    // the typical ways to die when calling an api
+    if (!response.ok) {
+      const problem = getGeneralApiProblem(response)
+      if (problem) return problem
+    }
+
+    return {kind: "ok"}
+  }
 }
 
 // Singleton instance of the API for convenience

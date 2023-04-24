@@ -1,6 +1,6 @@
 import { ApiResponse } from "apisauce"
 
-export type GeneralApiProblem =
+export type Problem =
   /**
    * Times up.
    */
@@ -38,6 +38,8 @@ export type GeneralApiProblem =
    */
   | { kind: "bad-data" }
 
+type Standard = { message?: string }
+export type GeneralApiProblem = Problem & Standard
 /**
  * Attempts to get a common cause of problems from an api response.
  *
