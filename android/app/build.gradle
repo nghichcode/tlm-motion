@@ -93,9 +93,9 @@ android {
 
     compileSdkVersion rootProject.ext.compileSdkVersion
 
-    namespace "com.awproject"
+    namespace "au.com.ideabox.talisman_motion"
     defaultConfig {
-        applicationId "com.awproject"
+        applicationId "au.com.ideabox.talisman_motion"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1

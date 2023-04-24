@@ -1,4 +1,4 @@
-package com.awproject;
+package au.com.ideabox.talisman_motion;
 
 import android.app.Application;
 import com.facebook.react.PackageList;

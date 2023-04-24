@@ -1,5 +1,5 @@
 {
-  "name": "AwProject",
+  "name": "TlmMotion",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -8,7 +8,8 @@
     "format": "prettier --write \"app/**/*.{js,jsx,json,md,ts,tsx}\"",
     "lint": "eslint . --fix --ext .js,.ts,.tsx  && npm run format",
     "start": "react-native start",
-    "test": "jest"
+    "test": "jest",
+    "patch": "patch-package"
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "^1.18.1",
@@ -32,6 +33,7 @@
     "validate.js": "^0.13.1"
   },
   "devDependencies": {
+    "patch-package": "6.4.7",
     "@babel/core": "^7.20.0",
     "@babel/preset-env": "^7.20.0",
     "@babel/runtime": "^7.20.0",
