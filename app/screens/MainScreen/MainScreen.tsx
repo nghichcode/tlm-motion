@@ -9,6 +9,7 @@ import {
 } from "react-native-sensors";
 import { Button, Text, TextField } from "../../components";
 import { colors } from "../../theme";
+import { LoadingModal } from "../../components/LoadingModal";
 
 const RNFS = require('react-native-fs');
 
@@ -68,9 +69,9 @@ const AccelerometerDataView = ({isStart}: { isStart: boolean }) => {
   return (
     <View>
       <Text style={{fontWeight: "bold"}}>Accelerometer</Text>
-      <Text>{`${Number(accelerometerData?.x || 0).toPrecision(4)} m/s^2`}</Text>
-      <Text>{`${Number(accelerometerData?.y || 0).toPrecision(4)} m/s^2`}</Text>
-      <Text>{`${Number(accelerometerData?.z || 0).toPrecision(4)} m/s^2`}</Text>
+      <Text>{`${Number(accelerometerData?.x || 0).toFixed(4)} m/s^2`}</Text>
+      <Text>{`${Number(accelerometerData?.y || 0).toFixed(4)} m/s^2`}</Text>
+      <Text>{`${Number(accelerometerData?.z || 0).toFixed(4)} m/s^2`}</Text>
     </View>
   )
 
@@ -106,9 +107,9 @@ const GyroscopeDataView = ({isStart}: { isStart: boolean }) => {
   return (
     <View>
       <Text style={{fontWeight: "bold"}}>Gyroscope</Text>
-      <Text>{`${Number(gyroscopeData?.x || 0).toPrecision(4)}`}</Text>
-      <Text>{`${Number(gyroscopeData?.y || 0).toPrecision(4)}`}</Text>
-      <Text>{`${Number(gyroscopeData?.z || 0).toPrecision(4)}`}</Text>
+      <Text>{`${Number(gyroscopeData?.x || 0).toFixed(4)}`}</Text>
+      <Text>{`${Number(gyroscopeData?.y || 0).toFixed(4)}`}</Text>
+      <Text>{`${Number(gyroscopeData?.z || 0).toFixed(4)}`}</Text>
     </View>
   )
 
@@ -220,6 +221,7 @@ export default function MainScreen() {
             disabled={loading} text={'UPLOAD'} preset={'filled'}/>
         </View>
       </View>
+      <LoadingModal visible={loading}/>
     </SafeAreaView>
   );
 }
